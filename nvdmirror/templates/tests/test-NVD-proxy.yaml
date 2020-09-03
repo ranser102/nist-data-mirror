@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "test-nvdmirror-01-succeeded"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: test-succeeded
+      image: centos
+      command: ["sh","-c", "curl -k -sS -I -o /dev/null -w '%{http_code}' https://<proxy url>"]
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "100m"
+        limits:
+          memory: "128Mi"
+          cpu: "100m"
+  restartPolicy: Never
